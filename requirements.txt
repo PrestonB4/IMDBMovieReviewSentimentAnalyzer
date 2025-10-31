@@ -8,3 +8,4 @@ scikit-learn
 flask
 joblib
 kaggle
+gunicorn
