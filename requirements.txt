@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+seaborn
+beautifulsoup4
+nltk
+scikit-learn
+flask
+joblib
+kaggle
