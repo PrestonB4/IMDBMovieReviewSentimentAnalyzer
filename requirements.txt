@@ -9,3 +9,5 @@ flask
 joblib
 kaggle
 gunicorn
+flask
+flask-cors
