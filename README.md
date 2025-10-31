@@ -1,151 +1,142 @@
 # IMDB Movie Review Sentiment Analyzer
 ## Preston Brownlee
+### AI Assistance: Chat-GPT
 
-This project is a Natural Language Processing (NLP) application that performs **sentiment analysis** on movie reviews from the IMDB dataset. It predicts whether a review expresses **positive** or **negative** sentiment, using classical machine learning techniques and Python libraries.
+**Live Application**: [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
 
-The model is also deployed in a React-based frontend for real-time sentiment prediction.
+This project is a Natural Language Processing (NLP) application that performs sentiment analysis on movie reviews (from the IMDB dataset). It classifies each review as positive or negative, using a machine‑learning pipeline trained in Python and deployed behind a React frontend for real‑time prediction.
+
+The system consists of:
+- A Flask backend API (hosted on Render.com) which loads a pre‑trained model pipeline and returns sentiment scores.  
+- A React frontend (hosted on Vercel) which lets users input a review, sends it to the backend, and visualizes the output with a gauge chart and walkthrough.
 
 ---
 
 ## Project Overview
 
-- **Goal**: Classify IMDB movie reviews as either *positive* or *negative*.
-- **Dataset**: `IMDB Dataset for Sentiment Analysis` from Kaggle (CSV format).
-- **Model**: Trained using Logistic Regression and later enhanced using LinearSVC.
-- **Accuracy**: Achieved over 90% on the test set.
-- **Deployment**: React frontend with a sentiment gauge and prediction results.
+- Goal: Classify IMDB movie reviews as positive or negative.  
+- Dataset: IMDB movie review dataset (balanced ~50/50 positive/negative).  
+- Model Pipeline: Text preprocessing (punctuation removal, stop‑word filtering), TF‑IDF vectorization (unigrams + bigrams), Logistic Regression and then Linear SVC classifier.  
+- Performance: Achieved ~90% accuracy on test set, with confusion matrix and full evaluation metrics.  
+- Deployment:  
+  - Backend: Render.com (Free tier) – [https://imdb-sentiment-backend.onrender.com/](https://imdb-sentiment-backend.onrender.com/)  
+  - Frontend: Vercel (Free tier) – [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
 
 ---
 
 ## Setup Instructions
 
-### 1. Clone the Repository
+> Note: This application is fully deployed and accessible online. It may take a minute or so to run the first time online since I'm using the free version of render. Once it runs the first time it should run quickly after that. 
+> You can use the live version here:  
+> [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
 
-```bash
-git clone https://github.com/yourusername/sentiment-analyzer.git
-cd sentiment-analyzer
-```
-
-### 2. Install Python Requirements
-
-It's best to use a virtual environment:
-
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 3. Download the IMDB Dataset (via Kaggle)
-
-1. Go to https://www.kaggle.com/account
-2. Scroll to the API section and click "Create New API Token".
-3. Move the `kaggle.json` file into the `data/` folder in this repo.
-4. Use the download snippet from the Jupyter notebook:
-
-```python
-from kaggle.api.kaggle_api_extended import KaggleApi
-api = KaggleApi()
-api.authenticate()
-api.dataset_download_files(
-    "columbine/imdb-dataset-sentiment-analysis-in-csv-format",
-    path="data/",
-    unzip=True
-)
-```
+> If you'd prefer to run the project locally (or if you're offline), follow the steps below to launch the backend and frontend manually from your machine.
 
 ---
 
-### 4. Start the Backend (Flask API)
+### 1. Download & Unzip
 
-```bash
-python app.py
-```
+- Extract the folder to your preferred location
 
 ---
 
-### 5. Start the Frontend (React App)
+### 2. Backend Setup (Flask API)
 
-```bash
-cd sentiment-frontend
-npm install
-npm start
-```
+1. Create and activate a virtual environment:
 
-The app will launch at: `http://localhost:3000`
+    ```bash
+    python -m venv venv
+    source venv/bin/activate     # On Windows: venv\Scripts\activate
+    ```
 
----
+2. Install Python dependencies:
 
-## Project Folder Structure
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-```
-sentiment-analyzer/
-│
-├── app.py                       # Flask backend API
-├── notebook.ipynb              # Jupyter Notebook (full training pipeline)
-├── requirements.txt            # Python dependencies
-├── sentiment_model.pkl         # Logistic regression model
-├── sentiment_pipeline.pkl      # Final LinearSVC pipeline
-│
-├── data/                       # Contains Kaggle credentials and dataset
-│   ├── kaggle.json
-│   ├── Train.csv
-│   ├── Test.csv
-│   └── Valid.csv
-│
-├── plots/                      # Output visuals for evaluation
-│   ├── sentiment_distribution.png
-│   └── confusion_matrix.png
-│
-└── sentiment-frontend/         # React frontend
-    ├── App.js
-    ├── App.css
-    └── ...
-```
+3. Run the Flask server:
+
+    ```bash
+    python app.py
+    ```
+
+- The backend will be live at: [http://localhost:5000](http://localhost:5000)
 
 ---
 
-## Requirements
+### 3. Frontend Setup (React App)
 
-You can install all backend dependencies with:
+1. Open a new terminal and navigate into the frontend directory:
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    cd sentiment-frontend
+    ```
 
-**requirements.txt**:
+2. Install Node.js dependencies:
 
-```
-numpy
-pandas
-matplotlib
-seaborn
-nltk
-scikit-learn
-joblib
-beautifulsoup4
-kaggle
-```
+    ```bash
+    npm install
+    ```
 
----
+3. Start the React development server:
 
-## Notebook
+    ```bash
+    npm start
+    ```
 
-The complete model pipeline is documented in `notebook.ipynb`, which includes:
-- Data loading and preprocessing
-- EDA and visualizations
-- Model training (Logistic Regression and SVM)
-- Accuracy & evaluation (confusion matrix, classification report)
-- Final model export
+- The frontend will be live at: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## Deployment
+Once both servers are running, you can open the app in your browser and interact with the sentiment analyzer in real time.
+---
 
-This app is ready for deployment:
-- Frontend can be deployed on **Vercel**
-- Backend can be hosted via **Render** or **Replit**
+## Notebook and Training
 
-Links will be added when deployed!
+All model development and training are done in the included Jupyter Notebook:
+
+### `notebook.ipynb`
+
+This notebook handles:
+
+-  **Kaggle Dataset Access**:  
+  The IMDB movie review dataset is pulled directly from Kaggle using the Kaggle API.  
+  Note: I’ve removed my personal `kaggle.json` key for privacy.  
+  To download the data:
+  1. Go to Kaggle - https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews
+  2. Download your own `kaggle.json` API key
+  3. Place it inside a folder named `data/` in the project root
+  4. The notebook will detect the key and download the dataset
+
+-  **Data Cleaning**:  
+  - HTML tag stripping  
+  - Lowercasing  
+  - Stopword removal  
+  - Punctuation removal  
+  - Tokenization
+
+-  **Vectorization**:  
+  - TF-IDF (unigrams + bigrams)  
+  - 80/10/10 train/validation/test split
+
+-  **Model Training**:  
+  - Trains both a Logistic Regression model and a Linear SVC model  
+  - Evaluates performance (accuracy, precision, recall, F1 score)  
+  - Generates confusion matrix and class distribution plots
+
+-  **Model Saving**:  
+  - The final pipeline (TF-IDF + model) is serialized and saved to disk:  
+    - `sentiment_pipeline.pkl`  
+    - `tfidf_vectorizer.pkl`
+
+Once complete, these files are used by the Flask backend to serve real-time predictions.
 
 ---
+
+## Known Issues & Notes
+
+- The backend (hosted on Render) may take 30–60 seconds to respond on the first request if inactive.
+- You must add your own `kaggle.json` API key to use the notebook or download the dataset locally.
+- Make sure both frontend and backend URLs match if deploying separately.
+
