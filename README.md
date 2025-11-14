@@ -1,7 +1,7 @@
 # Application Portfolio Hub
 ## Preston Brownlee
 
-**Live Application**: [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
+**Live Application**: [https://preston-brownlee-portfolio.vercel.app/](https://preston-brownlee-portfolio.vercel.app/)
 
 This is a portfolio hub containing multiple machine learning and data science applications. The landing page provides access to all individual projects through a unified interface.
 
@@ -13,7 +13,7 @@ This is a portfolio hub containing multiple machine learning and data science ap
 
 **Deployment:**
 - Backend: Render.com (Free tier) – [https://imdb-sentiment-backend.onrender.com/](https://imdb-sentiment-backend.onrender.com/)
-- Frontend: Vercel (Free tier) – [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
+- Frontend: Vercel (Free tier) – [https://preston-brownlee-portfolio.vercel.app/](https://preston-brownlee-portfolio.vercel.app/)
 
 ---
 
