@@ -1,26 +1,33 @@
-# IMDB Movie Review Sentiment Analyzer
+# Application Portfolio Hub
 ## Preston Brownlee
-### AI Assistance: Chat-GPT
 
 **Live Application**: [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
 
-This project is a Natural Language Processing (NLP) application that performs sentiment analysis on movie reviews (from the IMDB dataset). It classifies each review as positive or negative, using a machine‑learning pipeline trained in Python and deployed behind a React frontend for real‑time prediction.
+This is a portfolio hub containing multiple machine learning and data science applications. The landing page provides access to all individual projects through a unified interface.
 
-The system consists of:
-- A Flask backend API (hosted on Render.com) which loads a pre‑trained model pipeline and returns sentiment scores.  
-- A React frontend (hosted on Vercel) which lets users input a review, sends it to the backend, and visualizes the output with a gauge chart and walkthrough.
+## System Architecture
+
+- **Single Flask Backend** with lazy-loaded Blueprints - Only loads resources when specific apps are accessed (saves memory on free tier)
+- **React Frontend** with React Router - Single-page app with multiple routes for different projects
+- **Modular Structure** - Each app lives in its own folder with independent models and logic
+
+**Deployment:**
+- Backend: Render.com (Free tier) – [https://imdb-sentiment-backend.onrender.com/](https://imdb-sentiment-backend.onrender.com/)
+- Frontend: Vercel (Free tier) – [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
 
 ---
 
-## Project Overview
+## Current Applications
 
-- Goal: Classify IMDB movie reviews as positive or negative.  
-- Dataset: IMDB movie review dataset (balanced ~50/50 positive/negative).  
-- Model Pipeline: Text preprocessing (punctuation removal, stop‑word filtering), TF‑IDF vectorization (unigrams + bigrams), Logistic Regression and then Linear SVC classifier.  
-- Performance: Achieved ~90% accuracy on test set, with confusion matrix and full evaluation metrics.  
-- Deployment:  
-  - Backend: Render.com (Free tier) – [https://imdb-sentiment-backend.onrender.com/](https://imdb-sentiment-backend.onrender.com/)  
-  - Frontend: Vercel (Free tier) – [https://imdb-sentiment-frontend-ten.vercel.app/](https://imdb-sentiment-frontend-ten.vercel.app/)
+### 1. IMDB Sentiment Analyzer
+- **Goal**: Classify IMDB movie reviews as positive or negative
+- **Dataset**: IMDB movie review dataset (balanced ~50/50 positive/negative)
+- **Model Pipeline**: Text preprocessing (punctuation removal, stop‑word filtering), TF‑IDF vectorization (unigrams + bigrams), Linear SVC classifier
+- **Performance**: Achieved ~90% accuracy on test set
+- **Endpoint**: `/api/nlp/predict`
+- **Route**: `/nlp-sentiment`
+
+More apps coming soon!
 
 ---
 
@@ -70,7 +77,7 @@ The system consists of:
 1. Open a new terminal and navigate into the frontend directory:
 
     ```bash
-    cd sentiment-frontend
+    cd frontend
     ```
 
 2. Install Node.js dependencies:
@@ -86,17 +93,51 @@ The system consists of:
     ```
 
 - The frontend will be live at: [http://localhost:3000](http://localhost:3000)
+- You'll see the portfolio landing page with cards for each app
+- Click on any app to navigate to it
 
 ---
 
 Once both servers are running, you can open the app in your browser and interact with the sentiment analyzer in real time.
 ---
 
-## Notebook and Training
+---
 
-All model development and training are done in the included Jupyter Notebook:
+## Project Structure
 
-### `notebook.ipynb`
+```
+NLPApplication/
+├── app.py                    # Main Flask app with blueprint registration
+├── apps/                     # Individual applications
+│   ├── nlp-sentiment/       # IMDB Sentiment Analyzer
+│   │   ├── nlp_blueprint.py # Flask Blueprint (lazy-loaded)
+│   │   ├── models/          # ML models (.pkl files)
+│   │   ├── notebook.ipynb   # Training notebook
+│   │   ├── data/            # Dataset files
+│   │   └── plots/           # Visualizations
+│   └── [future apps]/       # Add more apps here
+├── frontend/                 # React frontend
+│   └── src/
+│       ├── App.js           # Main router
+│       ├── pages/
+│       │   ├── Home.js      # Portfolio landing page
+│       │   └── NLPSentiment/  # NLP app component
+│       └── ...
+└── requirements.txt
+
+```
+
+---
+
+## Adding New Applications
+
+See `apps/README.md` for detailed instructions on adding new applications to the portfolio.
+
+---
+
+## NLP Sentiment Analyzer - Training Details
+
+Model development and training are in `apps/nlp-sentiment/notebook.ipynb`:
 
 This notebook handles:
 
