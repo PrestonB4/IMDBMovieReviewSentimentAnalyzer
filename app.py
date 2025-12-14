@@ -15,12 +15,14 @@ from apps.nba_team.nba_team_blueprint import nba_bp
 from apps.image_classifier.image_classifier_blueprint import image_bp
 from apps.lstm_predictor.lstm_blueprint import lstm_bp
 from apps.gan_flower.gan_blueprint import gan_bp
+from apps.energy_forecasting.energy_blueprint import energy_bp
 
 app.register_blueprint(nlp_bp)
 app.register_blueprint(nba_bp)
 app.register_blueprint(image_bp)
 app.register_blueprint(lstm_bp)
 app.register_blueprint(gan_bp)
+app.register_blueprint(energy_bp)
 
 @app.route('/')
 def index():
@@ -31,7 +33,8 @@ def index():
             {"name": "NBA Team Optimizer", "endpoint": "/api/nba"},
             {"name": "Image Classifier (Cats vs Dogs)", "endpoint": "/api/image-classifier"},
             {"name": "LSTM Next Word Predictor", "endpoint": "/api/lstm"},
-            {"name": "GAN Flower Generator", "endpoint": "/api/gan"}
+            {"name": "GAN Flower Generator", "endpoint": "/api/gan"},
+            {"name": "Energy Consumption Forecaster", "endpoint": "/api/energy"}
         ]
     })
 

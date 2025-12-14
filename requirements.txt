@@ -16,3 +16,4 @@ psutil
 torch
 torchvision
 pillow
+ucimlrepo
